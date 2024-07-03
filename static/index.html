@@ -3,64 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product API Interface</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <title>Product Management</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <div class="container">
-            <h1>Akumu Electronics and Phone Accessories Shop</h1>
-        </div>
+        <h1>Product Management Dashboard</h1>
     </header>
+
     <main>
-        <div class="container">
-            <section id="add-product">
-                <h2>Add a New Product</h2>
-                <form id="add-product-form">
-                    <div class="form-group">
-                        <label for="name">Name:</label>
-                        <input type="text" id="name" name="name" placeholder="Enter product name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="descr">Description:</label>
-                        <input type="text" id="descr" name="descr" placeholder="Enter product description" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="quantity">Quantity:</label>
-                        <input type="number" id="quantity" name="quantity" placeholder="Enter quantity" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sku">SKU:</label>
-                        <input type="text" id="sku" name="sku" placeholder="Enter SKU" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="price">Price:</label>
-                        <input type="number" step="0.01" id="price" name="price" placeholder="Enter price" required>
-                    </div>
-                    <button type="submit">Add Product</button>
-                </form>
-            </section>
-            <section id="get-product">
-                <h2>Retrieve a Product</h2>
-                <form id="get-product-form">
-                    <div class="form-group">
-                        <label for="product-id">Product ID:</label>
-                        <input type="number" id="product-id" name="product-id" placeholder="Enter product ID" required>
-                    </div>
-                    <button type="submit">Get Product</button>
-                </form>
-                <div id="product-details" class="product-details">
-                    <!-- Product details will be displayed here -->
-                </div>
-            </section>
-            <section id="product-list-section">
+        <section>
+            <form id="addProductForm" class="form">
+                <h2>Add New Product</h2>
+                <label for="addName">Name:</label>
+                <input type="text" id="addName" name="name" required>
+                <label for="addDescr">Description:</label>
+                <input type="text" id="addDescr" name="descr" required>
+                <label for="addQuantity">Quantity:</label>
+                <input type="number" id="addQuantity" name="quantity" required>
+                <label for="addSku">SKU:</label>
+                <input type="text" id="addSku" name="sku" required>
+                <label for="addPrice">Price:</label>
+                <input type="number" id="addPrice" name="price" required>
+                <button type="submit">Add Product</button>
+            </form>
+        </section>
+
+        <section>
+            <form id="updateProductForm" class="form">
+                <h2>Update Product</h2>
+                <label for="updateId">Product ID:</label>
+                <input type="number" id="updateId" name="product_id" required>
+                <label for="updateName">Name:</label>
+                <input type="text" id="updateName" name="name" required>
+                <label for="updateDescr">Description:</label>
+                <input type="text" id="updateDescr" name="descr" required>
+                <label for="updateQuantity">Quantity:</label>
+                <input type="number" id="updateQuantity" name="quantity" required>
+                <label for="updateSku">SKU:</label>
+                <input type="text" id="updateSku" name="sku" required>
+                <label for="updatePrice">Price:</label>
+                <input type="number" id="updatePrice" name="price" required>
+                <button type="submit">Update Product</button>
+            </form>
+        </section>
+
+        <section>
+            <form id="deleteProductForm" class="form">
+                <h2>Delete Product</h2>
+                <label for="deleteId">Product ID:</label>
+                <input type="number" id="deleteId" name="product_id" required>
+                <button type="submit">Delete Product</button>
+            </form>
+        </section>
+
+        <section>
+            <div id="productsList" class="products-list">
                 <h2>All Products</h2>
-                <div id="product-list">
-                    <!-- Product list will be displayed here -->
-                </div>
-            </section>
-        </div>
+                <button id="showProductsBtn">Show All Products</button>
+                <ul id="productsContainer"></ul>
+            </div>
+        </section>
     </main>
-    <script src="/static/script.js"></script>
+
+    <footer>
+        <p>&copy; 2024 Product Management Dashboard</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

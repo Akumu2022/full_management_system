@@ -16,8 +16,8 @@ class ProductsBase(BaseModel):
     name: str
     descr: str
     quantity: int
-    sku: str  # Including SKU in the Pydantic model
-    price: float  # Including price in the Pydantic model
+    sku: str  
+    price: float 
 
 def get_db():
     db = SessionLocal()
@@ -50,10 +50,35 @@ async def get_product(product_id: int, db:db_dependency):
     }
     return {"Details":prod_details}
 
-@app.get("/api/v1/products")
+@app.get("/api/v1/show_all_products")
 async def show_all_products(db:db_dependency):
     Products=db.query(models.Products).all()
     if not Products:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
-    
     return Products
+
+@app.delete("/api/v1/delete_products/{product_id}",status_code=status.HTTP_200_OK)
+async def delete_product(product_id: int,db:db_dependency):
+    product=db.query(models.Products).filter(models.Products.id==product_id).first()
+    if product is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="No such product to delete")
+    db.delete(product)
+    db.commit()
+    return {"Msg":"Product deleted successfully!"}
+
+
+@app.put("/api/v1/update_products/{product_id}",status_code=status.HTTP_200_OK)
+async def update_product(product_id: int,prod: ProductsBase,db:db_dependency):
+    product=db.query(models.Products).filter(models.Products.id==product_id).first()
+    if product is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="No such product to delete")
+    
+    product.name = prod.name
+    product.descr = prod.descr
+    product.quantity = prod.quantity
+    product.sku = prod.sku
+    product.price = prod.price
+
+    db.commit()
+    return {"Msg":"Product updated successfully!"}
+
